@@ -114,11 +114,11 @@ public class MenuService {
         final List<Long> menuIds = menus.stream()
                 .map(Menu::getId)
                 .collect(Collectors.toList());
-        final List<MenuProduct> menuProducts2 = menuProductRepository.findAllByMenuIds(menuIds);
+        final List<MenuProduct> menuProducts = menuProductRepository.findAllByMenuIds(menuIds);
 
         final List<MenuResponse> menuResponses = new ArrayList<>(menus.size());
         for (final Menu menu : menus) {
-            List<MenuProduct> menuProductsInMenu = menuProducts2.stream()
+            List<MenuProduct> menuProductsInMenu = menuProducts.stream()
                     .filter(menuProduct -> menuProduct.isSameMenuId(menu))
                     .collect(Collectors.toList());
             List<MenuProductResponse> menuProductResponses = MenuProductResponse.of(menuProductsInMenu);
